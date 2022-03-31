@@ -1,28 +1,51 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Système de pagination simple en PHP</title>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-<body style = "text-align: center">
+<body style="text-align:center">
 
 
-	<h2>Pagination simple en PHP</h2>
+<?php
 
-	<h3 style="color:red; text-align: left "> 
-      <?php
-	 session_start();
-	 if(isset($_SESSION['message'])){
-		 echo $_SESSION['message'] ;
-	 }
-	unset($_SESSION['message']) ;
-	  ?>
-</h3>
-	
-    <?php
+session_start();
+if(isset($_SESSION["login"]))
+{
+if( $_SESSION["login"]=="faux")
+{
+
+
+?>
+
+    <form action="login.php" method="post">
+     <label for="login">Nom d'utilisateur</label>
+     <input type="text" name="login" id="" required> <br><br>
+     <label for="password">Mot de passe</label>
+     <input type="password" name="password" id="" required> <br><br>  
+     <input type="reset" value="Effacer">
+     <input type="submit" value="Connecter">
+       
+    </form>
+    
+    <?php  
+    
+
+   
+        echo "<span style=\"color:red\"> Merci de vérifier vos coordonnees ! </span>" ; 
+    
+    
+} 
+else
+
+{
+?>
+
+<?php
 	// Importer le fichier de la base de données 
-	require_once 'db.php'; 
+	require_once '../db.php'; 
 	// Chercher le nombre de commentaires : 
 	$sql = "SELECT count(id) as nb FROM fichierrecursive";
 	// Exécuter la requête 
@@ -83,8 +106,10 @@
 	 ?>
 	 <td> 
 <div>
-			<img src="<?=$images[$i]['path']?>" alt="<?=$images[$i]["nom"]?>" width = "350px" height = "250px">
-		<div>
+			<img src="../<?=$images[$i]['path']?>" alt="<?=$images[$i]["nom"]?>" width = "350px" height = "250px">
+            <a href="supprimer.php?id=<?=$images[$i]['id']?>&nom=<?= $images[$i]['nom']?>">Supprimer</a>
+           
+            <div>
 		<p><?=$images[$i]["nom"]?>:<?=$images[$i]["type"]?> </p> 
 		</div>
 		</div>
@@ -97,8 +122,10 @@
 	 ?>
 	 <td>	 
 <div>
-			<img src="<?=$images[$i+1]['path']?>" alt="<?=$images[$i+1]["nom"]?>" width = "350px" height = "250px">
-		<div>
+			<img src="../<?=$images[$i+1]['path']?>" alt="<?=$images[$i+1]["nom"]?>" width = "350px" height = "250px">
+            <a href="supprimer.php?id=<?=$images[$i+1]['id']?>&nom=<?= $images[$i+1]['nom']?>">Supprimer</a>
+           
+            <div>
 		<p><?=$images[$i+1]["nom"]?>:<?=$images[$i+1]["type"]?> </p> 
 		</div>
 		</div>
@@ -114,8 +141,10 @@
 	 ?>
 	 <td> 
 <div>
-			<img src="<?=$images[$i+2]['path']?>" alt="<?=$images[$i+2]["nom"]?>" width = "350px" height = "250px">
-		<div>
+			<img src="../<?=$images[$i+2]['path']?>" alt="<?=$images[$i+2]["nom"]?>" width = "350px" height = "250px">
+            <a href="supprimer.php?id=<?=$images[$i+2]['id']?>&nom=<?= $images[$i+2]['nom']?>">Supprimer</a>
+           
+            <div>
 		<p><?=$images[$i+2]["nom"]?>:<?=$images[$i+2]["type"]?> </p> 
 		</div>
 		</div>
@@ -128,8 +157,9 @@
 	 ?>
 	 <td>	 
 <div>
-			<img src="<?=$images[$i+2]['path']?>" alt="<?=$images[$i+3]["nom"]?>" width = "350px" height = "250px">
-		<div>
+			<img src="../<?=$images[$i+2]['path']?>" alt="<?=$images[$i+3]["nom"]?>" width = "350px" height = "250px">
+		   <a href="supprimer.php?id=<?=$images[$i+3]['id']?>&nom=<?= $images[$i+3]['nom']?>">Supprimer</a>
+            <div>
 		<p><?=$images[$i+3]["nom"]?>:<?=$images[$i+3]["type"]?> </p> 
 		</div>
 		</div>
@@ -188,9 +218,33 @@
 		}
 		?>
     </div>	
-	<!-- 
-		Un formulaire pour ajouter un nouveau commentaire 
-	 -->
-	
+<?php
+
+}
+
+} 
+else
+{
+    ?>
+
+    
+<form action="login.php" method="post">
+     <label for="login">Nom d'utilisateur</label>
+     <input type="text" name="login" id="" required> <br><br>
+     <label for="password">Mot de passe</label>
+     <input type="password" name="password" id="" required> <br><br>  
+     <input type="reset" value="Effacer">
+     <input type="submit" value="Connecter">
+       
+    </form>
+
+  <?php
+}
+?>  
+
+   
+  
+ 
+    
 </body>
 </html>

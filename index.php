@@ -24,7 +24,7 @@
 	// Importer le fichier de la base de données 
 	require_once 'db.php'; 
 	// Chercher le nombre de commentaires : 
-	$sql = "SELECT count(id) as nb FROM fichierrecursive";
+	$sql = "SELECT count(id) as nb FROM fichier";
 	// Exécuter la requête 
 	$resultat=dbQuery($sql);
 	// Chercher les associations 
@@ -49,7 +49,7 @@
 	//echo $page;
 	//echo $debut;
 	// Sélectionner les commentaires dans un ordre decroissant, on se limite par le nombre de commentaire par page 
-	 $sql = "SELECT * FROM fichierrecursive order by id desc  ";
+	 $sql = "SELECT * FROM fichier order by id desc  ";
 	// On exécute la requête 
 	 $result = dbQuery($sql);
 	// Pour chercher toutes les associations (toutes les informations)
@@ -83,7 +83,7 @@
 	 ?>
 	 <td> 
 <div>
-			<img src="<?=$images[$i]['path']?>" alt="<?=$images[$i]["nom"]?>" width = "350px" height = "250px">
+			<img src="<?='telechargement/'.$images[$i]["nom"]?>" alt="<?=$images[$i]["nom"]?>" width = "350px" height = "250px">
 		<div>
 		<p><?=$images[$i]["nom"]?>:<?=$images[$i]["type"]?> </p> 
 		</div>
@@ -97,7 +97,7 @@
 	 ?>
 	 <td>	 
 <div>
-			<img src="<?=$images[$i+1]['path']?>" alt="<?=$images[$i+1]["nom"]?>" width = "350px" height = "250px">
+			<img src="<?='telechargement/'.$images[$i+1]["nom"]?>" alt="<?=$images[$i+1]["nom"]?>" width = "350px" height = "250px">
 		<div>
 		<p><?=$images[$i+1]["nom"]?>:<?=$images[$i+1]["type"]?> </p> 
 		</div>
@@ -114,7 +114,7 @@
 	 ?>
 	 <td> 
 <div>
-			<img src="<?=$images[$i+2]['path']?>" alt="<?=$images[$i+2]["nom"]?>" width = "350px" height = "250px">
+			<img src="<?='telechargement/'.$images[$i+2]["nom"]?>" alt="<?=$images[$i+2]["nom"]?>" width = "350px" height = "250px">
 		<div>
 		<p><?=$images[$i+2]["nom"]?>:<?=$images[$i+2]["type"]?> </p> 
 		</div>
@@ -128,7 +128,7 @@
 	 ?>
 	 <td>	 
 <div>
-			<img src="<?=$images[$i+2]['path']?>" alt="<?=$images[$i+3]["nom"]?>" width = "350px" height = "250px">
+			<img src="<?='telechargement/'.$images[$i+3]["nom"]?>" alt="<?=$images[$i+3]["nom"]?>" width = "350px" height = "250px">
 		<div>
 		<p><?=$images[$i+3]["nom"]?>:<?=$images[$i+3]["type"]?> </p> 
 		</div>
@@ -185,12 +185,24 @@
 			echo "<a href='?page=$index'>suivant</a>&nbsp&nbsp&nbsp";
 
 			}
+
 		}
+		
+
 		?>
     </div>	
 	<!-- 
 		Un formulaire pour ajouter un nouveau commentaire 
 	 -->
+   
+
+	<h3>Ajouter votre image</h3>
+	
+<form action="uploader.php" method="post" enctype="multipart/form-data">
+  selectionner le fichier à televerser:
+  <input type="file" name="fichier" id="fichier">
+  <input type="submit" value="televerser" name="submit">
+</form>
 	
 </body>
 </html>

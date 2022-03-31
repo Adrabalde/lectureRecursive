@@ -12,15 +12,16 @@
 set_time_limit (500);
 // le chemin de depart
 $path= "docs";
-
+$espace="";
 // l'appel de la fonction exploreDir
-explorerDir($path);
+echo $path."<br>";
+explorerDir($path,$espace);
 
-function explorerDir($path)
+function explorerDir($path,$espace)
 {
 	// ouvrir le dossier passé comme parametre d'entree
 	$folder = opendir($path);
-	
+	$espace .="---------";
 	// parcourir l'ensemble de dossier et de fichier du dossier courant
 	while($entree = readdir($folder))
 	{		
@@ -35,10 +36,10 @@ function explorerDir($path)
 				// changer le path courant par le nouveau dossier trouvé
 				$path .= "/".$entree;
 				// appel recursif sur le nouveau dossier 
-				explorerDir($path);
+				explorerDir($path,$espace);
 				// on revient vers le dossier initial
 				$path = $sav_path;
-                echo "Dossier: ".$entree."<br>";
+                echo $espace."Dossier: ".$entree."<br>";
 			}
 			else
 			{
@@ -49,7 +50,7 @@ function explorerDir($path)
                 $typedefichier = strtolower(pathinfo($path_source,PATHINFO_EXTENSION));
                 $nom = $entree ;
                 $taille = filesize($path_source) ;
-                echo "Fichier: ".$entree."<br>";
+                echo $espace."Fichier: ".$entree."<br>";
                 //Si c'est un .png ou un .jpeg
                 if($typedefichier=='jpeg' || $typedefichier == 'png' || $typedefichier == 'jpg') 
                   {
@@ -62,7 +63,6 @@ function explorerDir($path)
                    // db($sql);
                    
                    
-                    
 
                   }                
 				
